@@ -180,8 +180,7 @@ export default function Projects() {
         sx={{
           position: "relative",
           zIndex: 1,
-          py: 4,
-          px: { xs: 2, md: 6 },
+          px: { xs: 2, md: 0 },
           width: { xs: "100%", md: "70%" },
         }}
       >

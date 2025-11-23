@@ -10,7 +10,7 @@ export default function About() {
   return (
     <PageContainer sx={{ position: "relative", overflow: "hidden" }}>
       {/* --- BACKGROUND ANIMATIONS (Preserved from your request) --- */}
-      
+
       {/* Animated background gradient blobs */}
       <Sheet
         sx={{
@@ -285,8 +285,7 @@ export default function About() {
           right: "12%",
           width: "85px",
           height: "85px",
-          clipPath:
-            "polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)",
+          clipPath: "polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)",
           border: `3px solid ${colors.error}90`,
           opacity: isDark ? 0.6 : 0.45,
           animation: "float5 11s ease-in-out infinite",
@@ -314,9 +313,10 @@ export default function About() {
           minHeight: "85vh",
           position: "relative",
           zIndex: 1,
+          width: { xs: "100%", md: "70%" },
         }}
       >
-        <Grid xs={11} md={8}>
+        <Grid xs={12} md={12}>
           <Box
             sx={{
               display: "flex",
