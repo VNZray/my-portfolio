@@ -23,7 +23,9 @@ type TypographyColor =
   | "warning"
   | "info"
   | "success"
-  | "default";
+  | "default"
+  | "light"
+  | "dark";
 
 interface CustomTypographyProps
   extends Omit<
@@ -190,6 +192,8 @@ const getColor = (
     info: colors.info,
     success: colors.success,
     default: darkMode ? colors.white : colors.dark,
+    light: colors.white,
+    dark: colors.dark,
   };
   return colorMap[color];
 };

@@ -46,7 +46,7 @@ export default function Layout() {
   const location = useLocation();
   const { mode } = useColorScheme();
 
-  const navItems = ["Home", "Projects", "About"];
+  const navItems = ["Home",  "About", "Projects"];
 
   return (
     <Sheet
@@ -108,7 +108,7 @@ export default function Layout() {
                 {item}
               </Button>
             ))}
-            <Button>Login</Button>
+            <Button color="danger">Contact Us</Button>
           </Box>
 
           {/* --- MOBILE NAV: Visible on mobile (xs), hidden on desktop (md) --- */}
@@ -120,9 +120,10 @@ export default function Layout() {
               >
                 <MenuIcon />
               </MenuButton>
-              <Menu placement="bottom-end">
+              <Menu placement="bottom-end" sx={{ width: "100%" }}>
                 {navItems.map((item) => (
                   <MenuItem
+                  
                     key={item}
                     component={Link}
                     to={item === "Home" ? "/" : `/${item.toLowerCase()}`}

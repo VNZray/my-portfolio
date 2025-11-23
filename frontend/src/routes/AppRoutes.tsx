@@ -1,10 +1,11 @@
 import { AuthProvider } from "@/context/AuthContext";
 import Layout from "../layouts/Layout";
 import About from "../pages/About";
-import Home from "../pages/Home";
+// import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Projects from "../pages/Projects";
 import { Routes, Route, Outlet } from "react-router-dom";
+import LandingPage from "@/pages";
 
 export default function AppRoutes() {
   // Hardcoded for now, but usually comes from Auth Context
@@ -19,7 +20,7 @@ export default function AppRoutes() {
       >
         {/* 1. PUBLIC ROUTES */}
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<LandingPage />} />
           <Route path="projects" element={<Projects />} />
           <Route path="about" element={<About />} />
         </Route>

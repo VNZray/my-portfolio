@@ -21,7 +21,7 @@ const LeftColumn = () => {
         sx={{
           opacity: 0.5,
           fontWeight: 400,
-          fontSize: { xs: "1rem", md: "1.25rem" },
+          fontSize: { xs: "1.25rem", md: "1.50rem" },
           mb: 0.5,
         }}
       >

@@ -1,7 +1,7 @@
 // RightColumn.tsx
 
 import { Box, useColorScheme } from "@mui/joy";
-import placeholder from "@/assets/ray3.jpg";
+import placeholder from "@/assets/Hutao.png";
 import { colors } from "@/utils/Colors";
 
 const RightColumn = () => {

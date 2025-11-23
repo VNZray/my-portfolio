@@ -12,10 +12,11 @@ const PageContainer = ({ children, sx, gap = 2 }: Props) => {
     <Box
       gap={gap}
       sx={{
-        height: { xs: "auto", md: "93vh" },
+        height: { xs: "auto", md: "auto" },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: "column",
         ...sx,
       }}
     >
