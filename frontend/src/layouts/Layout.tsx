@@ -8,9 +8,17 @@ import {
   Box,
   IconButton,
   Avatar,
+  Dropdown,
+  Menu,
+  MenuButton,
+  MenuItem,
+  ListDivider,
 } from "@mui/joy";
 import DarkMode from "@mui/icons-material/DarkMode";
 import LightMode from "@mui/icons-material/LightMode";
+import MenuIcon from "@mui/icons-material/Menu"; // Import Hamburger Icon
+import placeholder from "@/assets/Hutao.jpg";
+import { colors } from "@/utils/Colors";
 
 // Mode Toggle Component
 function ModeToggle() {
@@ -36,6 +44,9 @@ function ModeToggle() {
 
 export default function Layout() {
   const location = useLocation();
+  const { mode } = useColorScheme();
+
+  const navItems = ["Home", "Projects", "About"];
 
   return (
     <Sheet
@@ -59,7 +70,7 @@ export default function Layout() {
           position: "sticky",
           top: 0,
           zIndex: 1000,
-          bgcolor: "background.surface",
+          bgcolor: mode === "dark" ? "background.surface" : "#F5FBFF",
         }}
       >
         <Typography
@@ -68,31 +79,73 @@ export default function Layout() {
           to="/"
           sx={{ textDecoration: "none", color: "text.primary" }}
         >
-          RC
+          vnz.
+          <span style={{color: colors.error}}>div</span>
         </Typography>
 
         <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-          {["Home", "Projects", "About"].map((item) => (
-            <Button
-              key={item}
-              component={Link}
-              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-              variant={
-                location.pathname ===
-                (item === "Home" ? "/" : `/${item.toLowerCase()}`)
-                  ? "soft"
-                  : "plain"
-              }
-              color="neutral"
-            >
-              {item}
-            </Button>
-          ))}
-          <Button>Login</Button>
+          {/* --- DESKTOP NAV: Hidden on mobile (xs), visible on desktop (md) --- */}
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              gap: 2,
+              alignItems: "center",
+            }}
+          >
+            {navItems.map((item) => (
+              <Button
+                key={item}
+                component={Link}
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                variant={
+                  location.pathname ===
+                  (item === "Home" ? "/" : `/${item.toLowerCase()}`)
+                    ? "soft"
+                    : "plain"
+                }
+                color="neutral"
+              >
+                {item}
+              </Button>
+            ))}
+            <Button>Login</Button>
+          </Box>
+
+          {/* --- MOBILE NAV: Visible on mobile (xs), hidden on desktop (md) --- */}
+          <Box sx={{ display: { xs: "inline-flex", md: "none" } }}>
+            <Dropdown>
+              <MenuButton
+                slots={{ root: IconButton }}
+                slotProps={{ root: { variant: "plain", color: "neutral" } }}
+              >
+                <MenuIcon />
+              </MenuButton>
+              <Menu placement="bottom-end">
+                {navItems.map((item) => (
+                  <MenuItem
+                    key={item}
+                    component={Link}
+                    to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                    selected={
+                      location.pathname ===
+                      (item === "Home" ? "/" : `/${item.toLowerCase()}`)
+                    }
+                  >
+                    {item}
+                  </MenuItem>
+                ))}
+                <ListDivider />
+                <MenuItem>Login</MenuItem>
+              </Menu>
+            </Dropdown>
+          </Box>
+
+          {/* --- ALWAYS VISIBLE --- */}
           <ModeToggle />
+
           <IconButton sx={{ borderRadius: "50%", padding: 0 }}>
             <Avatar color="warning" variant="solid">
-              RC
+              <img src={placeholder} width={"100%"} alt="" />
             </Avatar>
           </IconButton>
         </Box>
@@ -103,10 +156,9 @@ export default function Layout() {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
-          maxWidth: "1200px",
           mx: "auto",
           width: "100%",
+          bgcolor: mode === "dark" ? "background.surface" : "#F5FBFF",
         }}
       >
         <Outlet />
@@ -120,6 +172,7 @@ export default function Layout() {
           textAlign: "center",
           borderTop: "1px solid",
           borderColor: "divider",
+          bgcolor: mode === "dark" ? "background.surface" : "#F5FBFF",
         }}
       >
         <Typography level="body-sm">

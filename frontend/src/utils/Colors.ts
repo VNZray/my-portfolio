@@ -9,6 +9,7 @@ export const colors = {
     dark: "#1a1a1a",
     info: "#5bc0de",
     odd: "#F3F4F6",
+    undefined: undefined,
 };
 
 export const theme = {
