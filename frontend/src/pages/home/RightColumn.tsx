@@ -120,10 +120,10 @@ const RightColumn = () => {
         }}
       >
         <Typography.Label color="warning" sx={{ fontWeight: 800, fontSize: "1.2rem" }}>
-          3+
+          Hire me
         </Typography.Label>
         <Typography.Body size="xs" sx={{ whiteSpace: "nowrap" }}>
-          Years Experience
+          Please!!!
         </Typography.Body>
       </Box>
     </Box>
