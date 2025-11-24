@@ -217,7 +217,7 @@ export default function Projects() {
           </Typography.Body>
         </Box>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           {PROJECTS.map((project, index) => (
             <Grid key={project.id} xs={12} md={3} lg={3}>
               <ProjectCard project={project} index={index} />
