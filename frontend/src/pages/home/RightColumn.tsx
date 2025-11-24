@@ -11,8 +11,8 @@ const RightColumn = () => {
     <Box
       sx={{
         position: "relative",
-        width: { xs: "300px", sm: "350px", md: "450px" },
-        height: { xs: "300px", sm: "350px", md: "450px" },
+        width: { xs: "250px", sm: "280px", md: "300px", lg: "450px" },
+        height: { xs: "250px", sm: "280px", md: "300px", lg: "450px" },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

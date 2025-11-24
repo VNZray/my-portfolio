@@ -166,23 +166,18 @@ const LeftColumn = () => {
           display: "flex",
           gap: { xs: 2, md: 2 },
           flexWrap: "wrap",
-          justifyContent: { xs: "center", md: "flex-start" },
         }}
       >
         <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.dark : colors.white} hover gap="0" elevation={2} flex={1}>
-          <Typography.Title
-            level="h3"
+          <Typography.Header
             sx={{
-              fontSize: { xs: "1.25rem", md: "2rem" },
-              fontWeight: 700,
               color: colors.warning,
             }}
           >
             5+
-          </Typography.Title>
+          </Typography.Header>
           <Typography.Body
             sx={{
-              fontSize: { xs: "0.875rem", md: "1rem" },
               color: isDark ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.6)",
             }}
           >
@@ -191,19 +186,15 @@ const LeftColumn = () => {
         </Container>
 
         <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.dark : colors.white} hover gap="0" elevation={2} flex={1}>
-          <Typography.Title
-            level="h3"
+          <Typography.Header
             sx={{
-              fontSize: { xs: "1.25rem", md: "2rem" },
-              fontWeight: 700,
               color: colors.warning,
             }}
           >
             20+
-          </Typography.Title>
+          </Typography.Header>
           <Typography.Body
             sx={{
-              fontSize: { xs: "0.875rem", md: "1rem" },
               color: isDark ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.6)",
             }}
           >
@@ -212,19 +203,15 @@ const LeftColumn = () => {
         </Container>
 
         <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.dark : colors.white} hover gap="0" elevation={2} flex={1}>
-          <Typography.Title
-            level="h3"
+          <Typography.Header
             sx={{
-              fontSize: { xs: "1.25rem", md: "2rem" },
-              fontWeight: 700,
               color: colors.warning,
             }}
           >
             80+
-          </Typography.Title>
+          </Typography.Header>
           <Typography.Body
             sx={{
-              fontSize: { xs: "0.875rem", md: "1rem" },
               color: isDark ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.6)",
             }}
           >
