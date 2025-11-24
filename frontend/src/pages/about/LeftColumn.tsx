@@ -48,19 +48,6 @@ const LeftColumn = () => {
         of the curve.
       </Typography.Body>
 
-      <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mt: 1 }}>
-        {["React", "TypeScript", "UI/UX", "Node.js"].map((skill) => (
-          <Chip
-            key={skill}
-            variant="soft"
-            color="warning"
-            sx={{ fontWeight: 600 }}
-          >
-            {skill}
-          </Chip>
-        ))}
-      </Stack>
-
       <Box sx={{ pt: 2 }}>
         <Button
           component={Link}

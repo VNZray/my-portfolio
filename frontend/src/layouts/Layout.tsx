@@ -19,6 +19,7 @@ import LightMode from "@mui/icons-material/LightMode";
 import MenuIcon from "@mui/icons-material/Menu"; // Import Hamburger Icon
 import placeholder from "@/assets/Hutao.jpg";
 import { colors } from "@/utils/Colors";
+import { Code } from "@mui/icons-material";
 
 // Mode Toggle Component
 function ModeToggle() {
@@ -78,6 +79,7 @@ export default function Layout() {
           component={Link}
           to="/"
           sx={{ textDecoration: "none", color: "text.primary" }}
+          startDecorator={<Code />}
         >
           vnz.
           <span style={{color: colors.error}}>dev</span>

@@ -2,6 +2,7 @@ import PageContainer from "@/components/PageContainer";
 import { colors } from "@/utils/Colors";
 import { Box, Grid, useColorScheme } from "@mui/joy";
 import LeftColumn from "./about/LeftColumn";
+import TechStack from "./about/TechStack";
 
 export default function About() {
   const { mode } = useColorScheme();
@@ -68,6 +69,7 @@ export default function About() {
             }}
           >
             <LeftColumn />
+            <TechStack />
           </Box>
         </Grid>
       </Grid>
