@@ -80,7 +80,7 @@ export default function Layout() {
           sx={{ textDecoration: "none", color: "text.primary" }}
         >
           vnz.
-          <span style={{color: colors.error}}>div</span>
+          <span style={{color: colors.error}}>dev</span>
         </Typography>
 
         <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
