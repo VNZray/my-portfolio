@@ -3,6 +3,7 @@ import Projects from "./Projects";
 import About from "./About";
 import React, { useEffect } from "react";
 import Loading from "@/components/Loading";
+import Experiences from "./Experiences";
 
 const LandingPage = () => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -25,6 +26,7 @@ const LandingPage = () => {
     <div>
       <Home />
       <About />
+      <Experiences />
       <Projects />
     </div>
   );

@@ -11,8 +11,9 @@ const PageContainer = ({ children, sx, gap = 2 }: Props) => {
   return (
     <Box
       gap={gap}
+      minHeight={"100vh"}
       sx={{
-        height: { xs: "auto", md: "100vh" },
+        height: { xs: "auto", md: "auto" },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

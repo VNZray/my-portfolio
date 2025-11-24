@@ -32,6 +32,9 @@ const TECH_DATA: Record<Category, TechItem[]> = {
   Databases: [
     { name: "MySQL", icon: "mysql/mysql-original.svg", color: "#4479A1" },
     { name: "MariaDB", icon: "mariadb/mariadb-original.svg", color: "#003545" },
+    { name: "Supabase", icon: "supabase/supabase-original.svg", color: "#3ECF8E" },
+    { name: "Knex.js", icon: "knexjs/knexjs-original.svg", color: "#E16426" },
+    { name: "Prisma", icon: "prisma/prisma-original.svg", color: "#2D3748" },
   ],
 };
 

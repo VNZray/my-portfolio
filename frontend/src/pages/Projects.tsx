@@ -71,7 +71,6 @@ export default function Projects() {
   return (
     <PageContainer sx={{ position: "relative", minHeight: "100vh" }}>
     
-
       {/* --- CONTENT --- */}
       <Box
         sx={{

@@ -168,7 +168,7 @@ const LeftColumn = () => {
           flexWrap: "wrap",
         }}
       >
-        <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.dark : colors.white} hover gap="0" elevation={2} flex={1}>
+        <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.transparentBlack : colors.transparentWhite} hover gap="0" elevation={2} flex={1}>
           <Typography.Header
             sx={{
               color: colors.warning,
@@ -185,7 +185,7 @@ const LeftColumn = () => {
           </Typography.Body>
         </Container>
 
-        <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.dark : colors.white} hover gap="0" elevation={2} flex={1}>
+        <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.transparentBlack : colors.transparentWhite} hover gap="0" elevation={2} flex={1}>
           <Typography.Header
             sx={{
               color: colors.warning,
@@ -202,7 +202,7 @@ const LeftColumn = () => {
           </Typography.Body>
         </Container>
 
-        <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.dark : colors.white} hover gap="0" elevation={2} flex={1}>
+        <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.transparentBlack : colors.transparentWhite} hover gap="0" elevation={2} flex={1}>
           <Typography.Header
             sx={{
               color: colors.warning,
