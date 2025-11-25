@@ -6,6 +6,7 @@ import NotFound from "../pages/NotFound";
 import Projects from "../pages/Projects";
 import { Routes, Route, Outlet } from "react-router-dom";
 import LandingPage from "@/pages";
+import DashboardLayout from "@/layouts/DashboardLayout";
 
 export default function AppRoutes() {
   // Hardcoded for now, but usually comes from Auth Context
@@ -23,6 +24,10 @@ export default function AppRoutes() {
           <Route index element={<LandingPage />} />
           <Route path="projects" element={<Projects />} />
           <Route path="about" element={<About />} />
+        </Route>
+
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<div>Dashboard</div>} />
         </Route>
       </Route>
 

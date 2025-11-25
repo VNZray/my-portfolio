@@ -9,7 +9,8 @@
     "generate": "npx prisma generate",
     "migrate": "npx prisma migrate dev",
     "reset": "npx prisma migrate reset --force",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "pull": "npx prisma db pull"
   },
   "keywords": [],
   "author": "Rayven Clores",

@@ -7,18 +7,375 @@ datasource db {
   provider = "mysql"
 }
 
-model User {
-  id    String @id @default(uuid()) @db.Char(36)
-  email String @unique
-  name  String?
-  posts Post[]
+model amenity {
+  id                 Int                  @id @default(autoincrement()) @db.UnsignedInt
+  name               String               @db.VarChar(40)
+  icon               String               @db.VarChar(255)
+  business_amenities business_amenities[]
+  room_amenities     room_amenities[]
 }
 
-model Post {
-  id    String     @id @default(uuid()) @db.Char(36)
-  title     String
-  content   String? @db.Text
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  String
+model barangay {
+  id              Int          @id @default(autoincrement()) @db.UnsignedInt
+  name            String       @db.VarChar(100)
+  municipality_id Int          @db.UnsignedInt
+  municipality    municipality @relation(fields: [municipality_id], references: [id], onDelete: Cascade, map: "barangay_municipality_id_foreign")
+  owner           owner[]
+  tourist         tourist[]
+
+  @@index([municipality_id], map: "barangay_municipality_id_foreign")
+}
+
+model booking {
+  id              String                 @id @default(dbgenerated("(uuid())")) @db.Char(36)
+  pax             Int
+  num_children    Int                    @default(0)
+  num_adults      Int                    @default(0)
+  foreign_counts  Int                    @default(0)
+  domestic_counts Int                    @default(0)
+  overseas_counts Int                    @default(0)
+  local_counts    Int                    @default(0)
+  trip_purpose    String                 @db.VarChar(30)
+  check_in_date   DateTime               @db.Date
+  check_out_date  DateTime               @db.Date
+  total_price     Float                  @db.Float
+  balance         Float?                 @db.Float
+  booking_status  booking_booking_status
+  business_id     String                 @db.Char(36)
+  room_id         String                 @db.Char(36)
+  tourist_id      String                 @db.Char(36)
+  created_at      DateTime?              @default(now()) @db.Timestamp(0)
+  business        business               @relation(fields: [business_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "booking_business_id_foreign")
+  room            room                   @relation(fields: [room_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "booking_room_id_foreign")
+  tourist         tourist                @relation(fields: [tourist_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "booking_tourist_id_foreign")
+  payment         payment[]
+
+  @@index([business_id], map: "booking_business_id_foreign")
+  @@index([room_id], map: "booking_room_id_foreign")
+  @@index([tourist_id], map: "booking_tourist_id_foreign")
+}
+
+model business {
+  id                   String               @id @default(dbgenerated("(uuid())")) @db.Char(36)
+  business_name        String               @db.VarChar(50)
+  description          String?              @db.Text
+  min_price            Float                @db.Float
+  max_price            Float                @db.Float
+  email                String               @db.VarChar(40)
+  phone_number         String               @db.VarChar(14)
+  business_category_id Int
+  business_type_id     Int
+  province_id          Int
+  municipality_id      Int
+  barangay_id          Int
+  owner_id             String               @db.Char(36)
+  status               business_status
+  business_image       String?              @db.Text
+  created_at           DateTime?            @default(now()) @db.Timestamp(0)
+  latitude             String               @db.VarChar(30)
+  longitude            String               @db.VarChar(30)
+  tiktok_url           String?              @db.Text
+  facebook_url         String?              @db.Text
+  instagram_url        String?              @db.Text
+  hasBooking           Boolean              @default(true)
+  booking              booking[]
+  business_amenities   business_amenities[]
+  external_booking     external_booking[]
+  room                 room[]
+}
+
+model business_amenities {
+  id          Int      @id @default(autoincrement()) @db.UnsignedInt
+  business_id String   @db.Char(36)
+  amenity_id  Int      @db.UnsignedInt
+  amenity     amenity  @relation(fields: [amenity_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "business_amenities_amenity_id_foreign")
+  business    business @relation(fields: [business_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "business_amenities_business_id_foreign")
+
+  @@index([amenity_id], map: "business_amenities_amenity_id_foreign")
+  @@index([business_id], map: "business_amenities_business_id_foreign")
+}
+
+model category {
+  id       Int    @id @default(autoincrement()) @db.UnsignedInt
+  category String @db.VarChar(30)
+  type_id  Int    @db.UnsignedInt
+  type     type   @relation(fields: [type_id], references: [id], onDelete: Cascade, map: "category_type_id_foreign")
+
+  @@index([type_id], map: "category_type_id_foreign")
+}
+
+model external_booking {
+  id          Int      @id @default(autoincrement()) @db.UnsignedInt
+  name        String   @db.VarChar(40)
+  link        String   @db.VarChar(255)
+  business_id String   @db.Char(36)
+  business    business @relation(fields: [business_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "external_booking_business_id_foreign")
+
+  @@index([business_id], map: "external_booking_business_id_foreign")
+}
+
+model knex_migrations {
+  id             Int       @id @default(autoincrement()) @db.UnsignedInt
+  name           String?   @db.VarChar(255)
+  batch          Int?
+  migration_time DateTime? @db.Timestamp(0)
+}
+
+model knex_migrations_lock {
+  index     Int  @id @default(autoincrement()) @db.UnsignedInt
+  is_locked Int?
+}
+
+model municipality {
+  id          Int        @id @default(autoincrement()) @db.UnsignedInt
+  name        String     @db.VarChar(100)
+  province_id Int        @db.UnsignedInt
+  barangay    barangay[]
+  province    province   @relation(fields: [province_id], references: [id], onDelete: Cascade, map: "municipality_province_id_foreign")
+  owner       owner[]
+  tourist     tourist[]
+
+  @@index([province_id], map: "municipality_province_id_foreign")
+}
+
+model owner {
+  id              String              @id @default(dbgenerated("(uuid())")) @db.Char(36)
+  first_name      String              @db.VarChar(30)
+  middle_name     String?             @db.VarChar(20)
+  last_name       String              @db.VarChar(30)
+  age             Int?
+  birthday        DateTime?           @db.Date
+  gender          owner_gender?
+  email           String              @db.VarChar(40)
+  phone_number    String              @db.VarChar(13)
+  business_type   owner_business_type
+  province_id     Int                 @db.UnsignedInt
+  municipality_id Int                 @db.UnsignedInt
+  barangay_id     Int                 @db.UnsignedInt
+  created_at      DateTime?           @default(now()) @db.Timestamp(0)
+  barangay        barangay            @relation(fields: [barangay_id], references: [id], onUpdate: Restrict, map: "owner_barangay_id_foreign")
+  municipality    municipality        @relation(fields: [municipality_id], references: [id], onUpdate: Restrict, map: "owner_municipality_id_foreign")
+  province        province            @relation(fields: [province_id], references: [id], onUpdate: Restrict, map: "owner_province_id_foreign")
+  user            user[]
+
+  @@index([barangay_id], map: "owner_barangay_id_foreign")
+  @@index([municipality_id], map: "owner_municipality_id_foreign")
+  @@index([province_id], map: "owner_province_id_foreign")
+}
+
+model payment {
+  id             String                 @id @default(dbgenerated("(uuid())")) @db.Char(36)
+  payment_type   payment_payment_type
+  payment_method payment_payment_method
+  amount         Float                  @db.Float
+  status         payment_status?
+  tourist_id     String                 @db.Char(36)
+  booking_id     String                 @db.Char(36)
+  created_at     DateTime               @default(now()) @db.Timestamp(0)
+  booking        booking                @relation(fields: [booking_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "payment_booking_id_foreign")
+  tourist        tourist                @relation(fields: [tourist_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "payment_tourist_id_foreign")
+
+  @@index([booking_id], map: "payment_booking_id_foreign")
+  @@index([tourist_id], map: "payment_tourist_id_foreign")
+}
+
+model province {
+  id           Int            @id @default(autoincrement()) @db.UnsignedInt
+  name         String         @db.VarChar(100)
+  municipality municipality[]
+  owner        owner[]
+  tourist      tourist[]
+}
+
+model reply {
+  id                   String            @id @default(dbgenerated("(uuid())")) @db.Char(36)
+  review_and_rating_id String            @db.Char(36)
+  reply                String            @db.Text
+  created_at           DateTime          @default(now()) @db.Timestamp(0)
+  review_and_rating    review_and_rating @relation(fields: [review_and_rating_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "reply_review_and_rating_id_foreign")
+
+  @@index([review_and_rating_id], map: "reply_review_and_rating_id_foreign")
+}
+
+model review_and_rating {
+  id              String                            @id @default(dbgenerated("(uuid())")) @db.Char(36)
+  reviewable_type review_and_rating_reviewable_type
+  reviewable_id   String                            @db.Char(36)
+  rating          Int
+  comment         String                            @db.Text
+  touriat_id      String                            @db.Char(36)
+  created_at      DateTime                          @default(now()) @db.Timestamp(0)
+  reply           reply[]
+}
+
+model room {
+  id             String           @id @default(dbgenerated("(uuid())")) @db.Char(36)
+  business_id    String           @db.Char(36)
+  room_number    String           @db.VarChar(20)
+  room_type      String           @db.VarChar(20)
+  description    String?          @db.Text
+  room_price     Float            @db.Float
+  room_image     String?          @db.VarChar(255)
+  status         room_status
+  capacity       Int              @db.UnsignedInt
+  booking        booking[]
+  business       business         @relation(fields: [business_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "room_business_id_foreign")
+  room_amenities room_amenities[]
+
+  @@index([business_id], map: "room_business_id_foreign")
+}
+
+model room_amenities {
+  id         Int     @id @default(autoincrement()) @db.UnsignedInt
+  room_id    String  @db.Char(36)
+  amenity_id Int     @db.UnsignedInt
+  amenity    amenity @relation(fields: [amenity_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "room_amenities_amenity_id_foreign")
+  room       room    @relation(fields: [room_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "room_amenities_room_id_foreign")
+
+  @@index([amenity_id], map: "room_amenities_amenity_id_foreign")
+  @@index([room_id], map: "room_amenities_room_id_foreign")
+}
+
+model tourism {
+  id           String  @id @default(dbgenerated("(uuid())")) @db.Char(36)
+  first_name   String  @db.VarChar(30)
+  middle_name  String? @db.VarChar(20)
+  last_name    String  @db.VarChar(30)
+  position     String? @db.VarChar(20)
+  email        String  @db.VarChar(30)
+  phone_number String  @db.VarChar(14)
+  user         user[]
+}
+
+model tourist {
+  id              String            @id @default(dbgenerated("(uuid())")) @db.Char(36)
+  first_name      String            @db.VarChar(30)
+  middle_name     String?           @db.VarChar(20)
+  last_name       String            @db.VarChar(30)
+  ethnicity       tourist_ethnicity
+  birthday        DateTime          @db.Date
+  age             Int
+  gender          tourist_gender
+  nationality     String            @db.VarChar(20)
+  category        tourist_category
+  phone_number    String            @db.VarChar(13)
+  email           String            @db.VarChar(40)
+  province_id     Int               @db.UnsignedInt
+  municipality_id Int               @db.UnsignedInt
+  barangay_id     Int               @db.UnsignedInt
+  created_at      DateTime?         @default(now()) @db.Timestamp(0)
+  booking         booking[]
+  payment         payment[]
+  barangay        barangay          @relation(fields: [barangay_id], references: [id], onDelete: Cascade, map: "tourist_barangay_id_foreign")
+  municipality    municipality      @relation(fields: [municipality_id], references: [id], onDelete: Cascade, map: "tourist_municipality_id_foreign")
+  province        province          @relation(fields: [province_id], references: [id], onDelete: Cascade, map: "tourist_province_id_foreign")
+  user            user[]
+
+  @@index([barangay_id], map: "tourist_barangay_id_foreign")
+  @@index([municipality_id], map: "tourist_municipality_id_foreign")
+  @@index([province_id], map: "tourist_province_id_foreign")
+}
+
+model type {
+  id       Int        @id @default(autoincrement()) @db.UnsignedInt
+  type     String     @db.VarChar(30)
+  category category[]
+}
+
+model user {
+  id           String    @id @default(dbgenerated("(uuid())")) @db.Char(36)
+  role         user_role
+  email        String    @db.VarChar(40)
+  phone_number String    @db.VarChar(13)
+  password     String    @db.Text
+  tourist_id   String?   @db.Char(36)
+  owner_id     String?   @db.Char(36)
+  tourism_id   String?   @db.Char(36)
+  owner        owner?    @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "user_owner_id_foreign")
+  tourism      tourism?  @relation(fields: [tourism_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "user_tourism_id_foreign")
+  tourist      tourist?  @relation(fields: [tourist_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "user_tourist_id_foreign")
+
+  @@index([owner_id], map: "user_owner_id_foreign")
+  @@index([tourism_id], map: "user_tourism_id_foreign")
+  @@index([tourist_id], map: "user_tourist_id_foreign")
+}
+
+enum payment_payment_type {
+  Full_Payment    @map("Full Payment")
+  Partial_Payment @map("Partial Payment")
+}
+
+enum review_and_rating_reviewable_type {
+  Accommodation
+  Room
+  Shop
+  Event
+  Tourist_Spot  @map("Tourist Spot")
+}
+
+enum user_role {
+  Tourist
+  Owner
+  Tourism
+}
+
+enum payment_payment_method {
+  Gcash
+  Paymaya
+  Credit_Card @map("Credit Card")
+}
+
+enum payment_status {
+  Paid
+  Pending_Balance @map("Pending Balance")
+}
+
+enum tourist_ethnicity {
+  Bicolano
+  Non_Bicolano @map("Non-Bicolano")
+  Foreigner
+  Local
+}
+
+enum owner_gender {
+  Male
+  Female
+}
+
+enum room_status {
+  Available
+  Occupied
+  Maintenance
+  Reserved
+}
+
+enum tourist_gender {
+  Male
+  Female
+}
+
+enum owner_business_type {
+  Shop
+  Accommodation
+  Both
+}
+
+enum tourist_category {
+  Domestic
+  Overseas
+}
+
+enum booking_booking_status {
+  Pending
+  Booked
+  Checked_In  @map("Checked-In")
+  Checked_Out @map("Checked-Out")
+  Cancelled
+}
+
+enum business_status {
+  Pending
+  Active
+  Inactive
+  Maintenance
 }
