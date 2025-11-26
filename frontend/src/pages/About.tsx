@@ -3,10 +3,14 @@ import { colors } from "@/utils/Colors";
 import { Box, Grid, useColorScheme } from "@mui/joy";
 import LeftColumn from "./about/LeftColumn";
 import TechStack from "./about/TechStack";
+import Certifications from "./about/Certifications";
+import { useState } from "react";
+import Card from "@/components/Card";
 
 export default function About() {
   const { mode } = useColorScheme();
   const isDark = mode === "dark";
+  const [certificate, setCertificate] = useState<string[] | []>([""]);
 
   return (
     <PageContainer sx={{ position: "relative", overflow: "hidden" }}>
@@ -70,6 +74,7 @@ export default function About() {
           >
             <LeftColumn />
             <TechStack />
+            {certificate.length === 0 ? null : <Certifications />}
           </Box>
         </Grid>
       </Grid>

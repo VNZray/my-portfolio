@@ -2,7 +2,6 @@ import {
   AspectRatio,
   Box,
   Button,
-  Card,
   Chip,
   IconButton,
   Stack,
@@ -13,6 +12,7 @@ import { colors } from "@/utils/Colors";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LanguageIcon from "@mui/icons-material/Language";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import Card from "@/components/Card";
 
 export interface ProjectData {
   id: string;
@@ -34,33 +34,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
   const { mode } = useColorScheme();
   const isDark = mode === "dark";
   return (
-    <Card
-      variant="soft"
-      sx={{
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: "rgba(255, 255, 255, 0.05)",
-        backdropFilter: "blur(10px)",
-        border: "1px solid",
-        borderColor: "divider",
-        overflow: "hidden",
-        transition: "all 0.3s ease",
-        animation: `fadeInUp 0.6s ease-out ${index * 0.1}s backwards`,
-        "&:hover": {
-          transform: "translateY(-8px)",
-          boxShadow: `0 10px 40px -10px ${colors.warning}40`,
-          borderColor: `${colors.warning}60`,
-          "& .project-image": {
-            transform: "scale(1.1)",
-          },
-        },
-        "@keyframes fadeInUp": {
-          "0%": { opacity: 0, transform: "translateY(20px)" },
-          "100%": { opacity: 1, transform: "translateY(0)" },
-        },
-      }}
-    >
+    <Card index={index} hoverable orientation="vertical">
       {/* Image Container */}
       <AspectRatio ratio="16/9" sx={{ overflow: "hidden", borderRadius: "md" }}>
         <Box
@@ -133,7 +107,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           gap={1}
           sx={{ mt: "auto", pt: 1 }}
         >
-          <Typography.Label size="xs" color={isDark ? "light" : "dark"} sx={{ opacity: 0.7 }}>
+          <Typography.Label
+            size="xs"
+            color={isDark ? "light" : "dark"}
+            sx={{ opacity: 0.7 }}
+          >
             Languages:
           </Typography.Label>
           {project.languages.map((lang) => (

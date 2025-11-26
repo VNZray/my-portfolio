@@ -9,6 +9,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Button from "@/components/ui/Button";
 import { colors } from "@/utils/Colors";
 import Container from "@/components/Container";
+import { GitHub } from "@mui/icons-material";
 
 const LeftColumn = () => {
   const { mode } = useColorScheme();
@@ -72,24 +73,7 @@ const LeftColumn = () => {
         >
           <FacebookIcon />
         </IconButton>
-        <IconButton
-          variant="outlined"
-          sx={{
-            color: isDark ? colors.white : colors.dark,
-            borderColor: isDark
-              ? "rgba(255, 255, 255, 0.2)"
-              : "rgba(0, 0, 0, 0.2)",
-            borderRadius: "50%",
-            transition: "all 0.3s ease",
-            "&:hover": {
-              borderColor: colors.warning,
-              backgroundColor: `${colors.warning}15`,
-              transform: "translateY(-3px)",
-            },
-          }}
-        >
-          <TwitterIcon />
-        </IconButton>
+
         <IconButton
           variant="outlined"
           sx={{
@@ -125,6 +109,24 @@ const LeftColumn = () => {
           }}
         >
           <LinkedInIcon />
+        </IconButton>
+                <IconButton
+          variant="outlined"
+          sx={{
+            color: isDark ? colors.white : colors.dark,
+            borderColor: isDark
+              ? "rgba(255, 255, 255, 0.2)"
+              : "rgba(0, 0, 0, 0.2)",
+            borderRadius: "50%",
+            transition: "all 0.3s ease",
+            "&:hover": {
+              borderColor: colors.warning,
+              backgroundColor: `${colors.warning}15`,
+              transform: "translateY(-3px)",
+            },
+          }}
+        >
+          <GitHub />
         </IconButton>
       </Box>
 
