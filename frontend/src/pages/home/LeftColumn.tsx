@@ -7,6 +7,7 @@ import Button from "@/components/ui/Button";
 import { getColors } from "@/utils/Colors";
 import Container from "@/components/Container";
 import { socialService } from "@/services/socialService";
+import { projectService } from "@/services/projectService";
 import { ICON_MAP } from "@/pages/cms/components/IconSelect";
 import type { Social } from "@/types/User";
 
@@ -16,13 +17,14 @@ const LeftColumn = () => {
   const isDark = mode === "dark";
 
   const [socials, setSocials] = useState<Social[]>([]);
+  const [projectCount, setProjectCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    socialService
-      .getVisible()
-      .then(setSocials)
-      .finally(() => setLoading(false));
+    Promise.all([
+      socialService.getVisible().then(setSocials),
+      projectService.getAll().then((p) => setProjectCount(p.length)),
+    ]).finally(() => setLoading(false));
   }, []);
 
   return (
@@ -152,7 +154,7 @@ const LeftColumn = () => {
               color: colors.warning,
             }}
           >
-            5+
+            5 Years
           </Typography.Header>
           <Typography.Body
             sx={{
@@ -177,7 +179,7 @@ const LeftColumn = () => {
               color: colors.warning,
             }}
           >
-            20+
+            {projectCount}
           </Typography.Header>
           <Typography.Body
             sx={{
@@ -185,31 +187,6 @@ const LeftColumn = () => {
             }}
           >
             Project done
-          </Typography.Body>
-        </Container>
-
-        <Container
-          hoverEffect="glow"
-          background="light"
-          hover
-          gap="0"
-          elevation={2}
-          hoverGlowColor="error"
-          flex={1}
-        >
-          <Typography.Header
-            sx={{
-              color: colors.warning,
-            }}
-          >
-            80+
-          </Typography.Header>
-          <Typography.Body
-            sx={{
-              color: isDark ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.6)",
-            }}
-          >
-            Happy Clients
           </Typography.Body>
         </Container>
       </Box>
