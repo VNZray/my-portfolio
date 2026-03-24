@@ -1,10 +1,11 @@
 import { Box, useColorScheme } from "@mui/joy";
-import placeholder from "@/assets/Hutao.png"; // Using same placeholder or change to a specific about image
-import { colors } from "@/utils/Colors";
+import placeholder from "@/assets/RayvenClores5.png"; // Using same placeholder or change to a specific about image
+import { getColors } from "@/utils/Colors";
 import Typography from "@/components/ui/Typography";
 
 const RightColumn = () => {
   const { mode } = useColorScheme();
+  const colors = getColors(mode);
   const isDark = mode === "dark";
 
   return (
@@ -64,6 +65,7 @@ const RightColumn = () => {
           width: "100%",
           height: "100%",
           borderRadius: "40px",
+          backgroundColor: colors.error + 50,
           overflow: "hidden",
           boxShadow: `0 20px 50px ${isDark ? "rgba(0,0,0,0.5)" : "rgba(0,0,0,0.2)"}`,
           transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
@@ -73,20 +75,6 @@ const RightColumn = () => {
           },
         }}
       >
-         {/* Overlay Gradient */}
-         <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background: `linear-gradient(to bottom, transparent 60%, ${isDark ? "#000" : "#fff"} 100%)`,
-            opacity: 0.3,
-            zIndex: 2,
-          }}
-        />
-        
         <img
           src={placeholder}
           alt="About Me"
@@ -94,7 +82,7 @@ const RightColumn = () => {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            filter: isDark ? "brightness(0.9)" : "brightness(1)",
+            filter: `${isDark ? "brightness(0.9)" : "brightness(1)"} drop-shadow(0px 50px 60px ${isDark ? "rgba(0,0,0,0.6)" : "rgba(220,0,0,1)"})`,
           }}
         />
       </Box>
@@ -119,7 +107,10 @@ const RightColumn = () => {
           },
         }}
       >
-        <Typography.Label color="warning" sx={{ fontWeight: 800, fontSize: "1.2rem" }}>
+        <Typography.Label
+          color="warning"
+          sx={{ fontWeight: 800, fontSize: "1.2rem" }}
+        >
           Hire me
         </Typography.Label>
         <Typography.Body size="xs" sx={{ whiteSpace: "nowrap" }}>

@@ -2,10 +2,11 @@
 
 import { Box, useColorScheme } from "@mui/joy";
 import placeholder from "@/assets/Hutao.png";
-import { colors } from "@/utils/Colors";
+import { getColors } from "@/utils/Colors";
 
 const RightColumn = () => {
   const { mode } = useColorScheme();
+  const colors = getColors(mode);
   const isDark = mode === "dark";
 
   return (
@@ -78,10 +79,12 @@ const RightColumn = () => {
         <img
           width="100%"
           height="100%"
-          style={{ 
+          style={{
             objectFit: "cover",
             display: "block",
-            filter:  isDark ? "brightness(0.9) contrast(1.1)" : "brightness(1) contrast(1)",
+            filter: isDark
+              ? "brightness(0.9) contrast(1.1)"
+              : "brightness(1) contrast(1)",
           }}
           src={placeholder}
           alt="Portrait"

@@ -1,10 +1,11 @@
 import { Box, useColorScheme } from "@mui/joy";
 import placeholder from "@/assets/Hutao.png"; // Using same placeholder or change to a specific about image
-import { colors } from "@/utils/Colors";
+import { getColors } from "@/utils/Colors";
 import Typography from "@/components/ui/Typography";
 
 const RightColumn = () => {
   const { mode } = useColorScheme();
+  const colors = getColors(mode);
   const isDark = mode === "dark";
 
   return (
@@ -73,8 +74,8 @@ const RightColumn = () => {
           },
         }}
       >
-         {/* Overlay Gradient */}
-         <Box
+        {/* Overlay Gradient */}
+        <Box
           sx={{
             position: "absolute",
             top: 0,
@@ -86,7 +87,7 @@ const RightColumn = () => {
             zIndex: 2,
           }}
         />
-        
+
         <img
           src={placeholder}
           alt="About Me"
@@ -119,7 +120,10 @@ const RightColumn = () => {
           },
         }}
       >
-        <Typography.Label color="warning" sx={{ fontWeight: 800, fontSize: "1.2rem" }}>
+        <Typography.Label
+          color="warning"
+          sx={{ fontWeight: 800, fontSize: "1.2rem" }}
+        >
           3+
         </Typography.Label>
         <Typography.Body size="xs" sx={{ whiteSpace: "nowrap" }}>

@@ -1,90 +1,25 @@
+import { useEffect, useState } from "react";
 import PageContainer from "@/components/PageContainer";
 import Typography from "@/components/ui/Typography";
 import { colors } from "@/utils/Colors";
-import { Box, Grid } from "@mui/joy";
+import { Box, CircularProgress, Grid } from "@mui/joy";
 import ProjectCard from "@/pages/projects/ProjectCard";
-import image from "@/assets/city-venture.png";
-import acota from "@/assets/acota.png";
-
-export interface ProjectData {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  techStack: string[];
-  languages: string[];
-  githubUrl: string;
-  liveUrl: string;
-}
-
-// Mock Data
-const PROJECTS: ProjectData[] = [
-  {
-    id: "1",
-    title: "ACOTA",
-    description:
-      "Membership management system for ACOTA tourism association in Caramoan.",
-    image:
-      acota,
-    techStack: ["Laravel", "Vue"],
-    languages: ["Javascript", "PHP"],
-    githubUrl: "https://city-venture-vnzrays-projects.vercel.app/",
-    liveUrl: "https://city-venture-vnzrays-projects.vercel.app/",
-  },
-    {
-    id: "2",
-    title: "City Ventures",
-    description:
-      "A tourism management system for Naga City.",
-    image:
-      image,
-    techStack: ["React", "MUI Joy", "Recharts", "Redux"],
-    languages: ["TypeScript", "CSS"],
-    githubUrl: "https://city-venture-vnzrays-projects.vercel.app/",
-    liveUrl: "https://city-venture-vnzrays-projects.vercel.app/",
-  },
-  // {
-  //   id: "2",
-  //   title: "NeonChat - Realtime Messaging",
-  //   description:
-  //     "A sleek, dark-themed messaging application supporting private chats, group channels, and file sharing. Features end-to-end encryption and a responsive glassmorphism UI.",
-  //   image:
-  //     "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop",
-  //   techStack: ["Next.js", "Supabase", "Tailwind", "Socket.io"],
-  //   languages: ["TypeScript", "SQL"],
-  //   githubUrl: "https://github.com",
-  //   liveUrl: "https://vercel.com",
-  // },
-  // {
-  //   id: "3",
-  //   title: "TaskFlow - AI Project Manager",
-  //   description:
-  //     "An intelligent task management tool that uses AI to prioritize daily workflows, suggest deadlines, and summarize meeting notes automatically.",
-  //   image:
-  //     "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=1000&auto=format&fit=crop",
-  //   techStack: ["Vue.js", "Firebase", "OpenAI API", "Pinia"],
-  //   languages: ["JavaScript", "Python"],
-  //   githubUrl: "https://github.com",
-  //   liveUrl: "https://vercel.com",
-  // },
-  // {
-  //   id: "4",
-  //   title: "EcoTrack - Sustainability App",
-  //   description:
-  //     "A mobile-first web app gamifying carbon footprint reduction. Users can track daily habits, compete in challenges, and visualize their environmental impact.",
-  //   image:
-  //     "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1000&auto=format&fit=crop",
-  //   techStack: ["React Native", "Node.js", "Express", "MongoDB"],
-  //   languages: ["TypeScript", "Rust"],
-  //   githubUrl: "https://github.com",
-  //   liveUrl: "https://vercel.com",
-  // },
-];
+import { projectService } from "@/services/projectService";
+import type { Project } from "@/types/User";
 
 export default function Projects() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    projectService
+      .getVisible()
+      .then(setProjects)
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <PageContainer sx={{ position: "relative", minHeight: "100vh" }}>
-    
       {/* --- CONTENT --- */}
       <Box
         sx={{
@@ -127,13 +62,25 @@ export default function Projects() {
           </Typography.Body>
         </Box>
 
-        <Grid container spacing={2}>
-          {PROJECTS.map((project, index) => (
-            <Grid key={project.id} xs={12} md={6} lg={6} xl={3}>
-              <ProjectCard project={project} index={index} />
-            </Grid>
-          ))}
-        </Grid>
+        {loading ? (
+          <Box sx={{ display: "flex", justifyContent: "center", py: 8 }}>
+            <CircularProgress color="warning" />
+          </Box>
+        ) : projects.length === 0 ? (
+          <Typography.Body
+            sx={{ textAlign: "center", color: "text.secondary", py: 8 }}
+          >
+            No projects to display yet.
+          </Typography.Body>
+        ) : (
+          <Grid container spacing={2}>
+            {projects.map((project, index) => (
+              <Grid key={project.id} xs={12} md={6} lg={6} xl={3}>
+                <ProjectCard project={project} index={index} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Box>
     </PageContainer>
   );

@@ -18,8 +18,9 @@ import DarkMode from "@mui/icons-material/DarkMode";
 import LightMode from "@mui/icons-material/LightMode";
 import MenuIcon from "@mui/icons-material/Menu"; // Import Hamburger Icon
 import placeholder from "@/assets/Hutao.jpg";
-import { colors } from "@/utils/Colors";
+import { getColors } from "@/utils/Colors";
 import { Code } from "@mui/icons-material";
+import { visitService } from "@/services/visitService";
 
 // Mode Toggle Component
 function ModeToggle() {
@@ -46,15 +47,25 @@ function ModeToggle() {
 export default function Layout() {
   const location = useLocation();
   const { mode } = useColorScheme();
+  const colors = getColors(mode);
 
-  const navItems = ["Home",  "About", "Projects"];
+  // Track portfolio visit once per session
+  React.useEffect(() => {
+    const hasVisited = sessionStorage.getItem("portfolio_visited");
+    if (!hasVisited) {
+      sessionStorage.setItem("portfolio_visited", "true");
+      visitService.trackVisit(location.pathname).catch(() => {});
+    }
+  }, []);
+
+  const navItems = ["Home", "About", "Projects"];
 
   return (
     <Sheet
       sx={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "100vh",
+        minHeight: "100dvh",
         bgcolor: "background.body",
       }}
     >
@@ -82,7 +93,7 @@ export default function Layout() {
           startDecorator={<Code />}
         >
           vnz.
-          <span style={{color: colors.error}}>dev</span>
+          <span style={{ color: colors.error }}>dev</span>
         </Typography>
 
         <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
@@ -110,7 +121,6 @@ export default function Layout() {
                 {item}
               </Button>
             ))}
-            <Button color="danger">Contact Us</Button>
           </Box>
 
           {/* --- MOBILE NAV: Visible on mobile (xs), hidden on desktop (md) --- */}
@@ -125,7 +135,6 @@ export default function Layout() {
               <Menu placement="bottom-end" sx={{ width: "100%" }}>
                 {navItems.map((item) => (
                   <MenuItem
-                  
                     key={item}
                     component={Link}
                     to={item === "Home" ? "/" : `/${item.toLowerCase()}`}

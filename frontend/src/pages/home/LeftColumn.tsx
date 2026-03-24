@@ -1,19 +1,29 @@
 // home/LeftColumn.tsx
 
+import { useEffect, useState } from "react";
 import Typography from "@/components/ui/Typography";
-import { Box, IconButton, useColorScheme } from "@mui/joy";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { Box, CircularProgress, IconButton, useColorScheme } from "@mui/joy";
 import Button from "@/components/ui/Button";
-import { colors } from "@/utils/Colors";
+import { getColors } from "@/utils/Colors";
 import Container from "@/components/Container";
-import { GitHub } from "@mui/icons-material";
+import { socialService } from "@/services/socialService";
+import { ICON_MAP } from "@/pages/cms/components/IconSelect";
+import type { Social } from "@/types/User";
 
 const LeftColumn = () => {
   const { mode } = useColorScheme();
+  const colors = getColors(mode);
   const isDark = mode === "dark";
+
+  const [socials, setSocials] = useState<Social[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    socialService
+      .getVisible()
+      .then(setSocials)
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <>
@@ -55,79 +65,39 @@ const LeftColumn = () => {
       </Typography.Title>
 
       <Box sx={{ display: "flex", gap: 1.5, my: 3 }}>
-        <IconButton
-          variant="outlined"
-          sx={{
-            color: isDark ? colors.white : colors.dark,
-            borderColor: isDark
-              ? "rgba(255, 255, 255, 0.2)"
-              : "rgba(0, 0, 0, 0.2)",
-            borderRadius: "50%",
-            transition: "all 0.3s ease",
-            "&:hover": {
-              borderColor: colors.warning,
-              backgroundColor: `${colors.warning}15`,
-              transform: "translateY(-3px)",
-            },
-          }}
-        >
-          <FacebookIcon />
-        </IconButton>
-
-        <IconButton
-          variant="outlined"
-          sx={{
-            color: isDark ? colors.white : colors.dark,
-            borderColor: isDark
-              ? "rgba(255, 255, 255, 0.2)"
-              : "rgba(0, 0, 0, 0.2)",
-            borderRadius: "50%",
-            transition: "all 0.3s ease",
-            "&:hover": {
-              borderColor: colors.warning,
-              backgroundColor: `${colors.warning}15`,
-              transform: "translateY(-3px)",
-            },
-          }}
-        >
-          <InstagramIcon />
-        </IconButton>
-        <IconButton
-          variant="outlined"
-          sx={{
-            color: isDark ? colors.white : colors.dark,
-            borderColor: isDark
-              ? "rgba(255, 255, 255, 0.2)"
-              : "rgba(0, 0, 0, 0.2)",
-            borderRadius: "50%",
-            transition: "all 0.3s ease",
-            "&:hover": {
-              borderColor: colors.warning,
-              backgroundColor: `${colors.warning}15`,
-              transform: "translateY(-3px)",
-            },
-          }}
-        >
-          <LinkedInIcon />
-        </IconButton>
-                <IconButton
-          variant="outlined"
-          sx={{
-            color: isDark ? colors.white : colors.dark,
-            borderColor: isDark
-              ? "rgba(255, 255, 255, 0.2)"
-              : "rgba(0, 0, 0, 0.2)",
-            borderRadius: "50%",
-            transition: "all 0.3s ease",
-            "&:hover": {
-              borderColor: colors.warning,
-              backgroundColor: `${colors.warning}15`,
-              transform: "translateY(-3px)",
-            },
-          }}
-        >
-          <GitHub />
-        </IconButton>
+        {loading ? (
+          <CircularProgress size="sm" color="warning" />
+        ) : (
+          socials.map((social) => {
+            const icon = ICON_MAP[social.icon || social.platform];
+            if (!icon) return null;
+            return (
+              <IconButton
+                key={social.id}
+                component="a"
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="outlined"
+                sx={{
+                  color: isDark ? colors.white : colors.dark,
+                  borderColor: isDark
+                    ? "rgba(255, 255, 255, 0.2)"
+                    : "rgba(0, 0, 0, 0.2)",
+                  borderRadius: "50%",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    borderColor: colors.warning,
+                    backgroundColor: `${colors.warning}15`,
+                    transform: "translateY(-3px)",
+                  },
+                }}
+              >
+                {icon}
+              </IconButton>
+            );
+          })
+        )}
       </Box>
 
       <Box sx={{ display: "flex", gap: 2, mb: 4, flexWrap: "wrap" }}>
@@ -136,7 +106,6 @@ const LeftColumn = () => {
           colorScheme="warning"
           size="lg"
           sx={{
-
             borderRadius: "8px",
             fontWeight: 600,
             transition: "all 0.3s ease",
@@ -148,7 +117,6 @@ const LeftColumn = () => {
           variant="outlined"
           colorScheme="warning"
           sx={{
-
             borderRadius: "8px",
             fontWeight: 600,
             transition: "all 0.3s ease",
@@ -170,7 +138,15 @@ const LeftColumn = () => {
           flexWrap: "wrap",
         }}
       >
-        <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.transparentBlack : colors.transparentWhite} hover gap="0" elevation={2} flex={1}>
+        <Container
+          hoverEffect="glow"
+          background="light"
+          hover
+          gap="0"
+          elevation={2}
+          flex={1}
+          hoverGlowColor="error"
+        >
           <Typography.Header
             sx={{
               color: colors.warning,
@@ -187,7 +163,15 @@ const LeftColumn = () => {
           </Typography.Body>
         </Container>
 
-        <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.transparentBlack : colors.transparentWhite} hover gap="0" elevation={2} flex={1}>
+        <Container
+          hoverEffect="glow"
+          background="light"
+          hover
+          gap="0"
+          elevation={2}
+          flex={1}
+          hoverGlowColor="error"
+        >
           <Typography.Header
             sx={{
               color: colors.warning,
@@ -204,7 +188,15 @@ const LeftColumn = () => {
           </Typography.Body>
         </Container>
 
-        <Container hoverEffect="glow" hoverGlowColor="rgba(255, 0, 0, 0.6)" background={isDark ? colors.transparentBlack : colors.transparentWhite} hover gap="0" elevation={2} flex={1}>
+        <Container
+          hoverEffect="glow"
+          background="light"
+          hover
+          gap="0"
+          elevation={2}
+          hoverGlowColor="error"
+          flex={1}
+        >
           <Typography.Header
             sx={{
               color: colors.warning,

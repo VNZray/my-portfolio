@@ -1,15 +1,27 @@
-export const colors = {
-    primary: "#0A1B47",
-    secondary: "#0077B6",
-    background: "#ffffff",
-    white: "#ffffff",
-    error: "#c70030	",
-    success: "#28a745",
-    warning: "#ff4545",
-    dark: "#1a1a1a",
-    info: "#5bc0de",
-    odd: "#F3F4F6",
-    undefined: undefined,
-    transparentWhite: "rgba(255, 255, 255, 0.5)",
-    transparentBlack: "rgba(40, 40, 40, 0.5)",
-};
+
+export const getColors = (mode?: "light" | "dark" | 'system' | undefined) => (
+    {
+        primary: mode === "dark" ? "#ff6b3d" : "#da5019",
+        secondary: mode === "dark" ? "#ffe066" : "#f6d33e",
+        background: mode === "dark" ? "#121212" : "#fdfcfa",
+        white: "#ffffff",
+        black: "#000000",
+        error: mode === "dark" ? "#ff4757" : "#c70030",
+        success: mode === "dark" ? "#2ecc71" : "#28a745",
+        warning: mode === "dark" ? "#ff6b6b" : "#ff4545",
+        info: mode === "dark" ? "#74d4f5" : "#5bc0de",
+        odd: mode === "dark" ? "#2a2a2a" : "#F3F4F6",
+        undefined: undefined,
+        transparentWhite: mode === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(255, 255, 255, 0.5)",
+        transparentBlack: mode === "dark" ? "rgba(0, 0, 0, 0.5)" : "rgba(40, 40, 40, 0.5)",
+        transparent: "transparent",
+        light: mode === "dark" ? "#1a1a1a" : "#ffffff",
+        dark: mode === "dark" ? "#f5f5f5" : "#1a1a1a",
+    });
+
+// Default light mode colors for backward compatibility
+export const colors = getColors("light");
+
+export const hoverColor = (color: string) => {
+    return color + "CC";
+}

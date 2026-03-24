@@ -1,16 +1,16 @@
 import PageContainer from "@/components/PageContainer";
 import { Box, Sheet, useColorScheme } from "@mui/joy";
-import { colors } from "@/utils/Colors";
+import { getColors } from "@/utils/Colors";
 import Achievements from "./experiences/Achievements";
 import School from "./experiences/School";
-import Hobbies from "./experiences/Hobbies";
 
 export default function Experiences() {
   const { mode } = useColorScheme();
+  const colors = getColors(mode);
   const isDark = mode === "dark";
 
   return (
-    <PageContainer sx={{ position: "relative",  minHeight: "100vh" }}>
+    <PageContainer sx={{ position: "relative", minHeight: "100dvh" }}>
       {/* --- BACKGROUND DECORATION --- */}
       <Sheet
         sx={{
@@ -30,25 +30,25 @@ export default function Experiences() {
 
       <Box sx={{ position: "relative", zIndex: 1, px: 2 }}>
         {/* Achievements Section */}
-        <Box 
-            sx={{ 
-                mb: 12,
-                animation: "fadeInUp 0.8s ease-out",
-                "@keyframes fadeInUp": {
-                    "0%": { opacity: 0, transform: "translateY(40px)" },
-                    "100%": { opacity: 1, transform: "translateY(0)" },
-                } 
-            }}
+        <Box
+          sx={{
+            mb: 12,
+            animation: "fadeInUp 0.8s ease-out",
+            "@keyframes fadeInUp": {
+              "0%": { opacity: 0, transform: "translateY(40px)" },
+              "100%": { opacity: 1, transform: "translateY(0)" },
+            },
+          }}
         >
           <Achievements />
         </Box>
 
         {/* Education Section */}
-        <Box 
-            sx={{ 
-                mb: 12,
-                animation: "fadeInUp 0.8s ease-out 0.2s backwards"
-            }}
+        <Box
+          sx={{
+            mb: 12,
+            animation: "fadeInUp 0.8s ease-out 0.2s backwards",
+          }}
         >
           <School />
         </Box>

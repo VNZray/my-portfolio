@@ -14,12 +14,10 @@ export default function Card({
   index = 0,
   hoverable = true,
   orientation = "horizontal",
-
   sx,
   ...props
 }: CustomCardProps) {
   const isVertical = orientation === "vertical";
-
   return (
     <JoyCard
       variant="soft"

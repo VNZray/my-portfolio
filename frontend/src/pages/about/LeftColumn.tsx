@@ -1,5 +1,5 @@
 import Typography from "@/components/ui/Typography";
-import { Box, Button, Chip, Stack } from "@mui/joy";
+import { Box, Button } from "@mui/joy";
 import { colors } from "@/utils/Colors";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
@@ -24,7 +24,7 @@ const LeftColumn = () => {
         </Typography.Title>
       </Box>
 
-      <Typography.Header size="sm" weight="normal" color="default">
+      <Typography.Header size="sm" color="default">
         Passionate Developer & UI/UX Enthusiast
       </Typography.Header>
 

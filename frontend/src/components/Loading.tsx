@@ -1,9 +1,10 @@
 import { Box, Typography, useColorScheme } from "@mui/joy";
-import { colors } from "@/utils/Colors";
+import { getColors } from "@/utils/Colors";
 import { BackgroundElements } from "@/components/ui/BackgroundElements";
 
 export default function Loading() {
   const { mode } = useColorScheme();
+  const colors = getColors(mode);
   const isDark = mode === "dark";
 
   return (
@@ -13,7 +14,7 @@ export default function Loading() {
         top: 0,
         left: 0,
         width: "100vw",
-        height: "100vh",
+        height: "100dvh",
         bgcolor: "background.body",
         display: "flex",
         flexDirection: "column",
@@ -58,7 +59,7 @@ export default function Loading() {
               },
             }}
           />
-          
+
           {/* Inner Reverse Ring */}
           <Box
             sx={{
@@ -89,11 +90,18 @@ export default function Loading() {
               width: "40px",
               height: "40px",
               backgroundColor: isDark ? "white" : "black",
-              clipPath: "polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%)",
+              clipPath:
+                "polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%)",
               animation: "pulseHex 1s ease-in-out infinite alternate",
               "@keyframes pulseHex": {
-                "0%": { transform: "translate(-50%, -50%) scale(0.8)", opacity: 0.5 },
-                "100%": { transform: "translate(-50%, -50%) scale(1.1)", opacity: 1 },
+                "0%": {
+                  transform: "translate(-50%, -50%) scale(0.8)",
+                  opacity: 0.5,
+                },
+                "100%": {
+                  transform: "translate(-50%, -50%) scale(1.1)",
+                  opacity: 1,
+                },
               },
             }}
           />

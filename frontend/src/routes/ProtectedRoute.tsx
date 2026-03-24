@@ -8,14 +8,14 @@ interface ProtectedRouteProps {
 }
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { user, loading } = useAuth();
+  const { user, loading, isAdmin } = useAuth();
 
   if (loading) {
     return <Loading />;
   }
 
-  if (!user) {
-    return <Navigate to="/" replace />;
+  if (!user || !isAdmin) {
+    return <Navigate to="/unauthorized" replace />;
   }
 
   return children;

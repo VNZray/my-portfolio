@@ -1,6 +1,6 @@
 {
-  "name": "template",
-  "description": "This is a react frontend boilerplate using MUI/Joy UI components",
+  "name": "rayven",
+  "description": "My Portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -16,6 +16,8 @@
     "@fontsource/inter": "^5.2.8",
     "@mui/icons-material": "^7.3.5",
     "@mui/joy": "^5.0.0-beta.52",
+    "@supabase/supabase-js": "^2.100.0",
+    "lucide-react": "^1.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.9.6"
@@ -31,6 +33,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "supabase": "^2.83.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",

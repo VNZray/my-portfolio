@@ -1,8 +1,9 @@
 import { Box, Sheet, useColorScheme } from "@mui/joy";
-import { colors } from "@/utils/Colors";
+import { getColors } from "@/utils/Colors";
 
 export const BackgroundElements = () => {
   const { mode } = useColorScheme();
+  const colors = getColors(mode);
   const isDark = mode === "dark";
 
   return (
@@ -164,61 +165,6 @@ export const BackgroundElements = () => {
         }}
       />
 
-      {/* Hexagon */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: "10%",
-          right: "25%",
-          width: "100px",
-          height: "100px",
-          clipPath:
-            "polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%)",
-          border: `3px solid ${colors.warning}90`,
-          opacity: isDark ? 0.6 : 0.45,
-          animation: "float4 14s ease-in-out infinite",
-          zIndex: 0,
-          boxShadow: `0 0 20px 2px ${colors.warning}60`,
-          background: `linear-gradient(120deg, ${colors.warning}20 0%, transparent 100%)`,
-          "@keyframes float4": {
-            "0%, 100%": {
-              transform: "translateY(0) rotate(0deg)",
-            },
-            "50%": {
-              transform: "translateY(-40px) rotate(60deg)",
-            },
-          },
-        }}
-      />
-
-      {/* Diamond/Rhombus */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: "30%",
-          right: "35%",
-          width: "70px",
-          height: "70px",
-          backgroundColor: `${colors.error}80`,
-          opacity: isDark ? 0.6 : 0.45,
-          transform: "rotate(45deg)",
-          animation: "wiggle 8s ease-in-out infinite",
-          zIndex: 0,
-          boxShadow: `0 0 16px 2px ${colors.error}60`,
-          "@keyframes wiggle": {
-            "0%, 100%": {
-              transform: "rotate(45deg) scale(1)",
-            },
-            "25%": {
-              transform: "rotate(55deg) scale(1.1)",
-            },
-            "75%": {
-              transform: "rotate(35deg) scale(0.9)",
-            },
-          },
-        }}
-      />
-
       {/* Circle 3 - Outline */}
       <Box
         sx={{
@@ -268,32 +214,6 @@ export const BackgroundElements = () => {
             "50%": {
               transform: "scale(1.2) rotate(180deg)",
               opacity: isDark ? 0.8 : 0.6,
-            },
-          },
-        }}
-      />
-
-      {/* Pentagon */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: "45%",
-          right: "12%",
-          width: "85px",
-          height: "85px",
-          clipPath: "polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)",
-          border: `3px solid ${colors.error}90`,
-          opacity: isDark ? 0.6 : 0.45,
-          animation: "float5 11s ease-in-out infinite",
-          zIndex: 0,
-          boxShadow: `0 0 16px 2px ${colors.error}60`,
-          background: `linear-gradient(120deg, ${colors.error}20 0%, transparent 100%)`,
-          "@keyframes float5": {
-            "0%, 100%": {
-              transform: "translateY(0) translateX(0)",
-            },
-            "50%": {
-              transform: "translateY(-25px) translateX(15px)",
             },
           },
         }}
