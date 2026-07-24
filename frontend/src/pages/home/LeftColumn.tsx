@@ -154,7 +154,7 @@ const LeftColumn = () => {
               color: colors.warning,
             }}
           >
-            5 Years
+            3 Years 
           </Typography.Header>
           <Typography.Body
             sx={{

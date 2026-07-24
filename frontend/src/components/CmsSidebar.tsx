@@ -22,7 +22,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import ShareIcon from "@mui/icons-material/Share";
 import LayersIcon from "@mui/icons-material/Layers";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import { Home, Logout } from "@mui/icons-material";
+import { FilePresent, Home, Logout } from "@mui/icons-material";
 import { useAuth } from "@/context/AuthContext";
 import { getColors } from "@/utils/Colors";
 
@@ -50,6 +50,7 @@ const cmsMenuItems = [
   { title: "Socials", icon: <ShareIcon />, path: "/cms/socials" },
   { title: "Tech Stack", icon: <LayersIcon />, path: "/cms/tech-stack" },
   { title: "Inquiries", icon: <MailIcon />, path: "/cms/inquiries" },
+  { title: "Requirements", icon: <FilePresent />, path: "/cms/requirements" },
 ];
 
 export default function CmsSidebar({

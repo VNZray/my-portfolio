@@ -51,8 +51,6 @@ export default function TechStackPage() {
     await fetchData();
   };
 
-  if (loading) return <Loading />;
-
   return (
     <CmsTable<TechStack>
       title="Tech Stack"

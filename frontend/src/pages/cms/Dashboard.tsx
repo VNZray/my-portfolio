@@ -103,8 +103,6 @@ export default function CMSDashboard() {
     fetchStats();
   }, []);
 
-  if (loading) return <Loading />;
-
   return (
     <Box>
       <Typography.Header size="md">Dashboard</Typography.Header>

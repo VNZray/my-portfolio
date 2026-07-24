@@ -75,8 +75,6 @@ export default function EducationPage() {
     });
   };
 
-  if (loading) return <Loading />;
-
   return (
     <CmsTable<Education>
       title="Education"

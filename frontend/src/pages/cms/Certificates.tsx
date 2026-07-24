@@ -76,7 +76,6 @@ export default function CertificatesPage() {
     });
   };
 
-  if (loading) return <Loading />;
 
   return (
     <CmsTable<Certificate>

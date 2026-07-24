@@ -15,6 +15,7 @@ import EducationPage from "@/pages/cms/Education";
 import InquiriesPage from "@/pages/cms/Inquiries";
 import SocialsPage from "@/pages/cms/Socials";
 import TechStackPage from "@/pages/cms/TechStack";
+import RequirementsPage from "@/pages/cms/Requirements";
 import ContactForm from "@/pages/ContactForm";
 import Unauthorized from "@/pages/Unauthorized";
 import ProtectedRoute from "@/routes/ProtectedRoute";
@@ -60,6 +61,7 @@ export default function AppRoutes() {
           <Route path="socials" element={<SocialsPage />} />
           <Route path="tech-stack" element={<TechStackPage />} />
           <Route path="inquiries" element={<InquiriesPage />} />
+          <Route path="requirements" element={<RequirementsPage />} />
         </Route>
       </Route>
 

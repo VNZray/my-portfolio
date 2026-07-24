@@ -57,9 +57,7 @@ export default function SocialsPage() {
     await socialService.delete(id);
     await fetchData();
   };
-
-  if (loading) return <Loading />;
-
+  
   return (
     <CmsTable<Social>
       title="Socials"

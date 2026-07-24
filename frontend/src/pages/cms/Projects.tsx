@@ -76,8 +76,6 @@ export default function ProjectsPage() {
     });
   };
 
-  if (loading) return <Loading />;
-
   return (
     <CmsTable<Project>
       title="Projects"

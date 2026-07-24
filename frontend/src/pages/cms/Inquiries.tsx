@@ -65,8 +65,6 @@ export default function InquiriesPage() {
 
   const unreadCount = data.filter((d) => !d.is_read).length;
 
-  if (loading) return <Loading />;
-
   return (
     <Box sx={{ animation: "fadeInUp 0.6s ease-out backwards" }}>
       {/* Header */}

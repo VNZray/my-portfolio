@@ -47,7 +47,6 @@ export default function AchievementsPage() {
     onChange({ image_url: url });
   };
 
-  if (loading) return <Loading />;
 
   return (
     <CmsTable<Achievement>
