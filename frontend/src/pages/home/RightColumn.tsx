@@ -114,7 +114,7 @@ const RightColumn = () => {
           Hire me
         </Typography.Label>
         <Typography.Body size="xs" sx={{ whiteSpace: "nowrap" }}>
-          Please!!!
+          Please!
         </Typography.Body>
       </Box>
     </Box>
