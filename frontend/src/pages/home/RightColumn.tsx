@@ -1,7 +1,6 @@
 import { Box, useColorScheme } from "@mui/joy";
 import placeholder from "@/assets/RayvenClores5.png"; // Using same placeholder or change to a specific about image
 import { getColors } from "@/utils/Colors";
-import Typography from "@/components/ui/Typography";
 
 const RightColumn = () => {
   const { mode } = useColorScheme();
@@ -85,37 +84,6 @@ const RightColumn = () => {
             filter: `${isDark ? "brightness(0.9)" : "brightness(1)"} drop-shadow(0px 50px 60px ${isDark ? "rgba(0,0,0,0.6)" : "rgba(220,0,0,1)"})`,
           }}
         />
-      </Box>
-
-      {/* Floating Badge */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: "3%",
-          right: "-15%",
-          backgroundColor: "background.surface",
-          padding: "1rem 1.5rem",
-          borderRadius: "lg",
-          boxShadow: "lg",
-          zIndex: 3,
-          animation: "floatBadge 6s ease-in-out infinite",
-          border: "1px solid",
-          borderColor: "divider",
-          "@keyframes floatBadge": {
-            "0%, 100%": { transform: "translateY(0)" },
-            "50%": { transform: "translateY(-10px)" },
-          },
-        }}
-      >
-        <Typography.Label
-          color="warning"
-          sx={{ fontWeight: 800, fontSize: "1.2rem" }}
-        >
-          Hire me
-        </Typography.Label>
-        <Typography.Body size="xs" sx={{ whiteSpace: "nowrap" }}>
-          Please!
-        </Typography.Body>
       </Box>
     </Box>
   );
