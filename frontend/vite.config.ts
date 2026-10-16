@@ -21,12 +21,12 @@ export default defineConfig({
         theme_color: '#ffffff',
         icons: [
           {
-            src: 'pwa-192x192.png', // You must add these images to /public later
+            src: 'logo.png', // You must add these images to /public later
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'logo.png',
             sizes: '512x512',
             type: 'image/png'
           }
@@ -34,7 +34,7 @@ export default defineConfig({
       }
     })
   ],
-    resolve: {
+  resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
